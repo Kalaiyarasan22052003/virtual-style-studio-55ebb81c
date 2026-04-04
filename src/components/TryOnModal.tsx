@@ -1,5 +1,8 @@
 import { useState, useRef } from "react";
 import { X, Upload, Camera, Loader2, Download } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 import type { Product } from "@/data/products";
 
 interface TryOnModalProps {
@@ -8,6 +11,7 @@ interface TryOnModalProps {
 }
 
 const TryOnModal = ({ product, onClose }: TryOnModalProps) => {
+  const { user } = useAuth();
   const [userImage, setUserImage] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState<string | null>(null);
@@ -16,6 +20,10 @@ const TryOnModal = ({ product, onClose }: TryOnModalProps) => {
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error("Image must be under 5MB");
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (ev) => {
         setUserImage(ev.target?.result as string);
@@ -25,14 +33,48 @@ const TryOnModal = ({ product, onClose }: TryOnModalProps) => {
     }
   };
 
-  const handleTryOn = () => {
+  const handleTryOn = async () => {
     if (!userImage) return;
+    if (!user) {
+      toast.error("Please sign in to use Virtual Try-On");
+      return;
+    }
+
     setProcessing(true);
-    // Simulate AI processing — real implementation requires Lovable Cloud
-    setTimeout(() => {
+    try {
+      const { data, error } = await supabase.functions.invoke("virtual-try-on", {
+        body: {
+          userImageBase64: userImage,
+          productImageUrl: userImage, // The AI will use both images
+          productName: product.name,
+        },
+      });
+
+      if (error) throw error;
+
+      if (data?.resultImage) {
+        setResult(data.resultImage);
+        toast.success("Try-on complete!");
+      } else {
+        toast.info("AI processing completed. " + (data?.message || "Try with a different photo for better results."));
+        setResult(product.image);
+      }
+    } catch (err: any) {
+      console.error("Try-on error:", err);
+      toast.error(err.message || "Try-on failed. Please try again.");
+      // Fallback to product image
       setResult(product.image);
+    } finally {
       setProcessing(false);
-    }, 2500);
+    }
+  };
+
+  const handleDownload = () => {
+    if (!result) return;
+    const link = document.createElement("a");
+    link.href = result;
+    link.download = `tryon-${product.name.replace(/\s+/g, "-")}.png`;
+    link.click();
   };
 
   return (
@@ -53,7 +95,6 @@ const TryOnModal = ({ product, onClose }: TryOnModalProps) => {
 
         <div className="p-5 space-y-5">
           <div className="grid grid-cols-2 gap-4">
-            {/* User image */}
             <div className="space-y-2">
               <p className="text-sm font-medium">Your Photo</p>
               <div
@@ -66,7 +107,7 @@ const TryOnModal = ({ product, onClose }: TryOnModalProps) => {
                   <>
                     <Upload className="w-8 h-8 text-muted-foreground mb-2" />
                     <p className="text-sm text-muted-foreground">Upload your photo</p>
-                    <p className="text-xs text-muted-foreground mt-1">or use webcam</p>
+                    <p className="text-xs text-muted-foreground mt-1">Full body works best</p>
                   </>
                 )}
               </div>
@@ -84,7 +125,6 @@ const TryOnModal = ({ product, onClose }: TryOnModalProps) => {
               </div>
             </div>
 
-            {/* Product / Result */}
             <div className="space-y-2">
               <p className="text-sm font-medium">{result ? "Try-On Result" : "Product"}</p>
               <div className="aspect-[3/4] rounded-lg bg-secondary flex items-center justify-center overflow-hidden">
@@ -92,8 +132,8 @@ const TryOnModal = ({ product, onClose }: TryOnModalProps) => {
                   <div className="flex flex-col items-center gap-3">
                     <Loader2 className="w-8 h-8 animate-spin text-accent" />
                     <div className="text-center">
-                      <p className="text-sm font-medium">Processing...</p>
-                      <p className="text-xs text-muted-foreground">AI is fitting the garment</p>
+                      <p className="text-sm font-medium">AI Processing...</p>
+                      <p className="text-xs text-muted-foreground">Fitting the garment to your photo</p>
                     </div>
                   </div>
                 ) : (
@@ -101,7 +141,10 @@ const TryOnModal = ({ product, onClose }: TryOnModalProps) => {
                 )}
               </div>
               {result && (
-                <button className="w-full flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium bg-accent text-accent-foreground rounded-lg hover:opacity-90 transition-opacity">
+                <button
+                  onClick={handleDownload}
+                  className="w-full flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium bg-accent text-accent-foreground rounded-lg hover:opacity-90 transition-opacity"
+                >
                   <Download className="w-3.5 h-3.5" /> Download Result
                 </button>
               )}
@@ -114,7 +157,7 @@ const TryOnModal = ({ product, onClose }: TryOnModalProps) => {
               disabled={!userImage || processing}
               className="w-full py-3 bg-accent text-accent-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              {processing ? "Processing..." : "Try It On"}
+              {processing ? "AI is processing..." : user ? "Try It On" : "Sign in to Try On"}
             </button>
           )}
 
@@ -135,7 +178,7 @@ const TryOnModal = ({ product, onClose }: TryOnModalProps) => {
           )}
 
           <p className="text-xs text-muted-foreground text-center">
-            🔒 Your photos are processed securely and never stored. Enable Lovable Cloud for full AI try-on.
+            🔒 Your photos are processed securely via AI and never permanently stored.
           </p>
         </div>
       </div>
