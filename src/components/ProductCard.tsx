@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Heart, Sparkles, Star } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
-import type { Product } from "@/data/products";
+import type { Product } from "@/hooks/useProducts";
 
 const ProductCard = ({ product }: { product: Product }) => {
   const { toggleWishlist, isInWishlist } = useCart();
