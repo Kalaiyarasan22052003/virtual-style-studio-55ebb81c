@@ -33,6 +33,11 @@ const Navbar = () => {
           <Link to="/shop" className="hover:text-accent transition-colors">Shop</Link>
           <Link to="/shop?gender=Women" className="hover:text-accent transition-colors">Women</Link>
           <Link to="/shop?gender=Men" className="hover:text-accent transition-colors">Men</Link>
+          {(hasRole("seller") || hasRole("admin")) && (
+            <Link to="/seller" className="hover:text-accent transition-colors flex items-center gap-1">
+              <Store className="w-3.5 h-3.5" /> Seller
+            </Link>
+          )}
           {hasRole("admin") && (
             <Link to="/admin" className="hover:text-accent transition-colors flex items-center gap-1">
               <Shield className="w-3.5 h-3.5" /> Admin
