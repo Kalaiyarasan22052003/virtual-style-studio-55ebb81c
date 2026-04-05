@@ -119,6 +119,11 @@ const Navbar = () => {
             <Link to="/shop" onClick={() => setMobileOpen(false)}>Shop</Link>
             <Link to="/shop?gender=Women" onClick={() => setMobileOpen(false)}>Women</Link>
             <Link to="/shop?gender=Men" onClick={() => setMobileOpen(false)}>Men</Link>
+            {(hasRole("seller") || hasRole("admin")) && (
+              <Link to="/seller" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
+                <Store className="w-4 h-4" /> Seller Dashboard
+              </Link>
+            )}
             {!user && <Link to="/auth" onClick={() => setMobileOpen(false)}>Sign In</Link>}
           </div>
         </nav>
