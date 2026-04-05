@@ -74,6 +74,10 @@ supabase/
 | `reviews` | Product ratings & comments |
 | `try_on_results` | AI try-on history |
 
+## 🛍 Product Catalog (21 items)
+
+Includes Men's, Women's, and Unisex products across categories: Tops, Shirts, T-Shirts, Dresses, Jackets, Hoodies, Blazers, Party Wear. All products support AI virtual try-on.
+
 ## 🚀 Getting Started
 
 1. Clone the repository
