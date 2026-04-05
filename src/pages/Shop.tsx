@@ -4,16 +4,33 @@ import { Search, SlidersHorizontal, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import { products, categories, genders } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const categories = [
+  { label: "All", value: "all" },
+  { label: "Tops", value: "Tops" },
+  { label: "Jackets", value: "Jackets" },
+  { label: "Dresses", value: "Dresses" },
+  { label: "Shirts", value: "Shirts" },
+  { label: "Party Wear", value: "Party Wear" },
+  { label: "Blazers", value: "Blazers" },
+  { label: "Hoodies", value: "Hoodies" },
+  { label: "T-Shirts", value: "T-Shirts" },
+];
+
+const genders = ["All", "Women", "Men", "Unisex"];
 
 const Shop = () => {
   const [searchParams] = useSearchParams();
   const initialGender = searchParams.get("gender") || "All";
 
+  const { data: products = [], isLoading } = useProducts();
+
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [gender, setGender] = useState(initialGender);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
   const [sortBy, setSortBy] = useState("default");
   const [showFilters, setShowFilters] = useState(false);
 
@@ -35,7 +52,7 @@ const Shop = () => {
     else if (sortBy === "rating") result.sort((a, b) => b.rating - a.rating);
 
     return result;
-  }, [search, category, gender, priceRange, sortBy]);
+  }, [products, search, category, gender, priceRange, sortBy]);
 
   return (
     <div className="min-h-screen">
@@ -119,7 +136,7 @@ const Shop = () => {
                 <input
                   type="range"
                   min={0}
-                  max={5000}
+                  max={10000}
                   step={100}
                   value={priceRange[1]}
                   onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
@@ -146,7 +163,17 @@ const Shop = () => {
 
           {/* Products grid */}
           <div className="flex-1">
-            {filtered.length === 0 ? (
+            {isLoading ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="space-y-3">
+                    <Skeleton className="aspect-[3/4] rounded-lg" />
+                    <Skeleton className="h-4 w-2/3" />
+                    <Skeleton className="h-4 w-1/3" />
+                  </div>
+                ))}
+              </div>
+            ) : filtered.length === 0 ? (
               <div className="text-center py-20">
                 <p className="text-muted-foreground">No products found</p>
               </div>

@@ -3,7 +3,7 @@ import { X, Upload, Camera, Loader2, Download } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
-import type { Product } from "@/data/products";
+import type { Product } from "@/hooks/useProducts";
 
 interface TryOnModalProps {
   product: Product;

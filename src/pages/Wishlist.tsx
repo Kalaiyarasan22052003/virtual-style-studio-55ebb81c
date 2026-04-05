@@ -3,11 +3,12 @@ import { Heart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import { products } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 import { useCart } from "@/contexts/CartContext";
 
 const Wishlist = () => {
   const { wishlist } = useCart();
+  const { data: products = [] } = useProducts();
   const wishlisted = products.filter((p) => wishlist.includes(p.id));
 
   if (wishlisted.length === 0) {
