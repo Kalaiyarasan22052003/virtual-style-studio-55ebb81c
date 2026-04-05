@@ -4,7 +4,7 @@ A full-stack fashion marketplace with AI virtual try-on, role-based access (Buye
 
 ## ✨ Features
 
-- **Product Catalog** — 10+ preloaded fashion items with filters by category, gender, price & search
+- **Product Catalog** — 20+ preloaded fashion items with filters by category, gender, price & search
 - **AI Virtual Try-On** — Upload your photo and see yourself wearing any garment, powered by Gemini image generation
 - **Authentication** — Email/password, Google & Apple OAuth with automatic role assignment
 - **Role-Based Access**
@@ -73,6 +73,10 @@ supabase/
 | `wishlist_items` | Saved items |
 | `reviews` | Product ratings & comments |
 | `try_on_results` | AI try-on history |
+
+## 🛍 Product Catalog (21 items)
+
+Includes Men's, Women's, and Unisex products across categories: Tops, Shirts, T-Shirts, Dresses, Jackets, Hoodies, Blazers, Party Wear. All products support AI virtual try-on.
 
 ## 🚀 Getting Started
 

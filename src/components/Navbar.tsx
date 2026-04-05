@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingBag, Heart, Search, Menu, X, User, LogOut, Shield } from "lucide-react";
+import { ShoppingBag, Heart, Search, Menu, X, User, LogOut, Shield, Store } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -33,6 +33,11 @@ const Navbar = () => {
           <Link to="/shop" className="hover:text-accent transition-colors">Shop</Link>
           <Link to="/shop?gender=Women" className="hover:text-accent transition-colors">Women</Link>
           <Link to="/shop?gender=Men" className="hover:text-accent transition-colors">Men</Link>
+          {(hasRole("seller") || hasRole("admin")) && (
+            <Link to="/seller" className="hover:text-accent transition-colors flex items-center gap-1">
+              <Store className="w-3.5 h-3.5" /> Seller
+            </Link>
+          )}
           {hasRole("admin") && (
             <Link to="/admin" className="hover:text-accent transition-colors flex items-center gap-1">
               <Shield className="w-3.5 h-3.5" /> Admin
@@ -114,6 +119,11 @@ const Navbar = () => {
             <Link to="/shop" onClick={() => setMobileOpen(false)}>Shop</Link>
             <Link to="/shop?gender=Women" onClick={() => setMobileOpen(false)}>Women</Link>
             <Link to="/shop?gender=Men" onClick={() => setMobileOpen(false)}>Men</Link>
+            {(hasRole("seller") || hasRole("admin")) && (
+              <Link to="/seller" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
+                <Store className="w-4 h-4" /> Seller Dashboard
+              </Link>
+            )}
             {!user && <Link to="/auth" onClick={() => setMobileOpen(false)}>Sign In</Link>}
           </div>
         </nav>
