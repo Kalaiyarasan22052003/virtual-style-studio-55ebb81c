@@ -90,6 +90,14 @@ const SellerDashboard = () => {
             <h1 className="font-display text-3xl font-semibold">Seller Dashboard</h1>
             <p className="text-sm text-muted-foreground mt-1">{products.length} products listed</p>
           </div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate("/shop")}
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-secondary text-secondary-foreground text-sm font-medium rounded-lg hover:bg-muted transition-colors"
+            >
+              <Users className="w-4 h-4" /> Switch to Buyer
+            </button>
+          </div>
         </div>
 
         {/* Tabs */}
