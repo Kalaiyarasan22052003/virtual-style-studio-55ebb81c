@@ -9,6 +9,7 @@ import SellerProductList from "@/components/seller/SellerProductList";
 import SellerProductForm from "@/components/seller/SellerProductForm";
 import SellerAnalytics from "@/components/seller/SellerAnalytics";
 import { Package, BarChart3, PlusCircle, ArrowLeft, Users } from "lucide-react";
+import { toast } from "sonner";
 
 type Tab = "products" | "add" | "analytics";
 
