@@ -46,6 +46,14 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-4">
+          {user && (hasRole("seller") || hasRole("admin")) && (
+            <Link
+              to="/seller"
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider bg-accent/10 text-accent rounded-full hover:bg-accent/20 transition-colors"
+            >
+              <Store className="w-3.5 h-3.5" /> Seller Mode
+            </Link>
+          )}
           <Link to="/shop" className="hover:text-accent transition-colors">
             <Search className="w-5 h-5" />
           </Link>
