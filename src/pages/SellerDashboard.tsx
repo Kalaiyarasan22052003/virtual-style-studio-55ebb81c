@@ -8,7 +8,8 @@ import Footer from "@/components/Footer";
 import SellerProductList from "@/components/seller/SellerProductList";
 import SellerProductForm from "@/components/seller/SellerProductForm";
 import SellerAnalytics from "@/components/seller/SellerAnalytics";
-import { Package, BarChart3, PlusCircle, ArrowLeft } from "lucide-react";
+import { Package, BarChart3, PlusCircle, ArrowLeft, Users } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 type Tab = "products" | "add" | "analytics";
 
