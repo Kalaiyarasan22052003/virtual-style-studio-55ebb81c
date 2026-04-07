@@ -36,7 +36,7 @@ function mapDbProduct(row: any): Product {
     stock: row.stock ?? 0,
     rating: Number(row.rating ?? 0),
     reviewCount: row.review_count ?? 0,
-    seller: row.seller_id || "MODISTA",
+    seller: row.seller_id || "V Dorbe",
     description: row.description || "",
   };
 }

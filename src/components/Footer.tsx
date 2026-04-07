@@ -34,7 +34,7 @@ const Footer = () => (
         </div>
       </div>
       <div className="border-t border-primary-foreground/10 mt-8 pt-8 text-center text-xs text-primary-foreground/50">
-        © 2026 MODISTA. All rights reserved.
+        © 2026 V Dorbe. All rights reserved.
       </div>
     </div>
   </footer>
