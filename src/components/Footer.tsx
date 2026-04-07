@@ -5,8 +5,9 @@ const Footer = () => (
     <div className="container mx-auto px-4 py-12">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
-          <h3 className="font-display text-xl font-semibold mb-4">V Dorbe</h3>
-          <p className="text-sm text-primary-foreground/70">Style, Visualized. AI-powered fashion.</p>
+          <h3 className="font-display text-2xl font-bold mb-1 bg-gradient-to-r from-accent via-accent/80 to-gold bg-clip-text text-transparent">V Dorbe</h3>
+          <p className="text-xs uppercase tracking-[0.3em] text-primary-foreground/50 mb-3">Style, Visualized</p>
+          <p className="text-sm text-primary-foreground/70">AI-powered fashion. Try before you buy.</p>
         </div>
         <div>
           <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider">Shop</h4>
