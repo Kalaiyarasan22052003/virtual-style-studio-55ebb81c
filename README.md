@@ -1,6 +1,6 @@
-# MODISTA — AI-Powered Fashion E-Commerce
+# V Dorbe — Style, Visualized
 
-A full-stack fashion marketplace with AI virtual try-on, role-based access (Buyer / Seller / Admin), and real-time product management.
+An AI-powered fashion marketplace with virtual try-on, role-based access (Buyer / Seller / Admin), and real-time product management.
 
 ## ✨ Features
 
