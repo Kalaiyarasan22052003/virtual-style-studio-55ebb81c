@@ -70,7 +70,7 @@ const Auth = () => {
           <div className="text-center">
             <h1 className="font-display text-3xl font-semibold">{isSignUp ? "Create Account" : "Welcome Back"}</h1>
             <p className="text-muted-foreground mt-2">
-              {isSignUp ? "Join MODISTA for AI-powered fashion" : "Sign in to your account"}
+              {isSignUp ? "Join V Dorbe — Style, Visualized" : "Sign in to your account"}
             </p>
           </div>
 

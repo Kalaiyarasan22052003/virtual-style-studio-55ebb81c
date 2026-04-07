@@ -25,7 +25,7 @@ const Navbar = () => {
         </button>
 
         <Link to="/" className="font-display text-xl md:text-2xl font-semibold tracking-tight">
-          MODISTA
+          V Dorbe
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide uppercase">
