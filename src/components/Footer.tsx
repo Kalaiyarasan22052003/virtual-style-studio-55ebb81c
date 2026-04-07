@@ -29,7 +29,7 @@ const Footer = () => (
           <div className="space-y-2 text-sm text-primary-foreground/70">
             <p>Instagram</p>
             <p>Twitter</p>
-            <p>support@modista.com</p>
+            <p>support@vdorbe.com</p>
           </div>
         </div>
       </div>
