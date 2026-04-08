@@ -88,13 +88,13 @@ const HeroSection = () => {
           >
             <Link
               to="/shop"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-accent-foreground font-semibold rounded-lg hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--accent)/0.4)] transition-all duration-300"
+              className="group inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 bg-accent text-accent-foreground font-semibold rounded-lg hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--accent)/0.4)] transition-all duration-300 text-sm sm:text-base"
             >
               Shop Now <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
-              to="/shop"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-primary-foreground/10 backdrop-blur-sm text-primary-foreground font-semibold rounded-lg border border-primary-foreground/20 hover:bg-primary-foreground/20 hover:scale-105 transition-all duration-300"
+              to="/try-on"
+              className="group inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 bg-primary-foreground/10 backdrop-blur-sm text-primary-foreground font-semibold rounded-lg border border-primary-foreground/20 hover:bg-primary-foreground/20 hover:scale-105 transition-all duration-300 text-sm sm:text-base"
             >
               <Sparkles className="w-4 h-4 group-hover:animate-spin" /> Try Virtual Fitting
             </Link>

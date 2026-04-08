@@ -32,7 +32,7 @@ const Cart = () => {
         <Link to="/shop" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6">
           <ArrowLeft className="w-4 h-4" /> Continue Shopping
         </Link>
-        <h1 className="font-display text-3xl font-semibold mb-8">Shopping Bag ({items.length})</h1>
+        <h1 className="font-display text-2xl sm:text-3xl font-semibold mb-6 sm:mb-8">Shopping Bag ({items.length})</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-4">
