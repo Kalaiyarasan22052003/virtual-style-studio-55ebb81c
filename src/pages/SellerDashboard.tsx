@@ -85,23 +85,21 @@ const SellerDashboard = () => {
     <div className="min-h-screen">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="font-display text-3xl font-semibold">Seller Dashboard</h1>
+            <h1 className="font-display text-2xl sm:text-3xl font-semibold">Seller Dashboard</h1>
             <p className="text-sm text-muted-foreground mt-1">{products.length} products listed</p>
           </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => navigate("/shop")}
-              className="inline-flex items-center gap-2 px-4 py-2.5 bg-secondary text-secondary-foreground text-sm font-medium rounded-lg hover:bg-muted transition-colors"
-            >
-              <Users className="w-4 h-4" /> Switch to Buyer
-            </button>
-          </div>
+          <button
+            onClick={() => navigate("/shop")}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-secondary text-secondary-foreground text-sm font-medium rounded-lg hover:bg-muted transition-colors w-full sm:w-auto"
+          >
+            <Users className="w-4 h-4" /> Switch to Buyer
+          </button>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 mb-8 border-b border-border">
+        <div className="flex gap-1 mb-8 border-b border-border overflow-x-auto scrollbar-hide">
           {tabs.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
@@ -109,13 +107,13 @@ const SellerDashboard = () => {
                 if (id !== "add") setEditingProductId(null);
                 setActiveTab(id);
               }}
-              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+              className={`flex items-center gap-2 px-3 sm:px-4 py-3 text-xs sm:text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                 activeTab === id
                   ? "border-accent text-accent"
                   : "border-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
-              <Icon className="w-4 h-4" /> {label}
+              <Icon className="w-4 h-4" /> <span className="hidden sm:inline">{label}</span><span className="sm:hidden">{id === "add" ? (editingProductId ? "Edit" : "Add") : id === "products" ? "Products" : "Stats"}</span>
             </button>
           ))}
         </div>

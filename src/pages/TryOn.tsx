@@ -96,10 +96,10 @@ const TryOn = () => {
         </Link>
 
         <div className="text-center mb-10">
-          <h1 className="font-display text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent via-accent/80 to-gold bg-[length:200%_auto] animate-text-shimmer bg-clip-text text-transparent mb-3">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent via-accent/80 to-gold bg-[length:200%_auto] animate-text-shimmer bg-clip-text text-transparent mb-3">
             Virtual Try-On Studio
           </h1>
-          <p className="text-muted-foreground max-w-xl mx-auto">
+          <p className="text-muted-foreground max-w-xl mx-auto text-sm sm:text-base px-2">
             Upload a photo of yourself and any clothing item to see how it looks on you — powered by AI.
           </p>
         </div>
@@ -192,7 +192,7 @@ const TryOn = () => {
             <button
               onClick={handleTryOn}
               disabled={!personImage || !clothingImage || processing || !user}
-              className="w-full py-4 bg-gradient-to-r from-accent to-gold text-accent-foreground font-bold text-lg rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg"
+              className="w-full py-3 sm:py-4 bg-gradient-to-r from-accent to-gold text-accent-foreground font-bold text-base sm:text-lg rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg"
             >
               {processing ? (
                 <>

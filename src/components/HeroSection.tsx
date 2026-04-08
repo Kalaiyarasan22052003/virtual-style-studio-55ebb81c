@@ -12,7 +12,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden min-h-[85vh] flex items-center">
+    <section className="relative overflow-hidden min-h-[60vh] sm:min-h-[75vh] md:min-h-[85vh] flex items-center">
       {/* Animated background */}
       <div className="absolute inset-0">
         <img
@@ -42,8 +42,8 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="relative container mx-auto px-4 py-24 md:py-36 lg:py-44">
-        <div className="max-w-2xl space-y-8">
+      <div className="relative container mx-auto px-4 py-16 sm:py-24 md:py-36 lg:py-44">
+        <div className="max-w-2xl space-y-5 sm:space-y-8">
           {/* Badge */}
           <div
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/15 backdrop-blur-md border border-accent/25 transition-all duration-700 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
@@ -54,7 +54,7 @@ const HeroSection = () => {
 
           {/* Brand name with animated reveal */}
           <div className={`transition-all duration-1000 delay-100 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-bold text-primary-foreground leading-[0.9] tracking-tight">
+            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-primary-foreground leading-[0.9] tracking-tight">
               <span className="inline-block animate-[text-glow_3s_ease-in-out_infinite] bg-gradient-to-r from-primary-foreground via-accent to-primary-foreground bg-[length:200%_auto] bg-clip-text text-transparent">
                 V Dorbe
               </span>
@@ -69,7 +69,7 @@ const HeroSection = () => {
 
           {/* Headline */}
           <h2
-            className={`font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-primary-foreground leading-tight transition-all duration-700 delay-300 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+            className={`font-display text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-primary-foreground leading-tight transition-all duration-700 delay-300 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
           >
             Fashion Meets{" "}
             <span className="italic bg-gradient-to-r from-accent to-gold bg-clip-text text-transparent">
@@ -78,7 +78,7 @@ const HeroSection = () => {
           </h2>
 
           <p
-            className={`text-primary-foreground/75 text-lg md:text-xl max-w-lg leading-relaxed transition-all duration-700 delay-400 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+            className={`text-primary-foreground/75 text-sm sm:text-lg md:text-xl max-w-lg leading-relaxed transition-all duration-700 delay-400 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
           >
             Try before you buy. Our AI lets you see how every piece looks on you — no fitting room needed.
           </p>
@@ -88,13 +88,13 @@ const HeroSection = () => {
           >
             <Link
               to="/shop"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-accent-foreground font-semibold rounded-lg hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--accent)/0.4)] transition-all duration-300"
+              className="group inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 bg-accent text-accent-foreground font-semibold rounded-lg hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--accent)/0.4)] transition-all duration-300 text-sm sm:text-base"
             >
               Shop Now <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
-              to="/shop"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-primary-foreground/10 backdrop-blur-sm text-primary-foreground font-semibold rounded-lg border border-primary-foreground/20 hover:bg-primary-foreground/20 hover:scale-105 transition-all duration-300"
+              to="/try-on"
+              className="group inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 bg-primary-foreground/10 backdrop-blur-sm text-primary-foreground font-semibold rounded-lg border border-primary-foreground/20 hover:bg-primary-foreground/20 hover:scale-105 transition-all duration-300 text-sm sm:text-base"
             >
               <Sparkles className="w-4 h-4 group-hover:animate-spin" /> Try Virtual Fitting
             </Link>

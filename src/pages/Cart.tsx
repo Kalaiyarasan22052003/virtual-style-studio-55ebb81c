@@ -32,26 +32,29 @@ const Cart = () => {
         <Link to="/shop" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6">
           <ArrowLeft className="w-4 h-4" /> Continue Shopping
         </Link>
-        <h1 className="font-display text-3xl font-semibold mb-8">Shopping Bag ({items.length})</h1>
+        <h1 className="font-display text-2xl sm:text-3xl font-semibold mb-6 sm:mb-8">Shopping Bag ({items.length})</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-4">
             {items.map((item) => (
-              <div key={item.product.id + item.size + item.color} className="flex gap-4 p-4 bg-card rounded-xl border border-border">
-                <Link to={`/product/${item.product.id}`} className="w-24 h-32 flex-shrink-0 rounded-lg bg-secondary overflow-hidden">
+              <div key={item.product.id + item.size + item.color} className="flex gap-3 sm:gap-4 p-3 sm:p-4 bg-card rounded-xl border border-border">
+                <Link to={`/product/${item.product.id}`} className="w-20 h-24 sm:w-24 sm:h-32 flex-shrink-0 rounded-lg bg-secondary overflow-hidden">
                   <img src={item.product.image} alt={item.product.name} className="w-full h-full object-contain p-2" />
                 </Link>
                 <div className="flex-1 min-w-0">
-                  <Link to={`/product/${item.product.id}`} className="font-medium text-sm hover:text-accent transition-colors">{item.product.name}</Link>
+                  <Link to={`/product/${item.product.id}`} className="font-medium text-xs sm:text-sm hover:text-accent transition-colors line-clamp-2">{item.product.name}</Link>
                   <p className="text-xs text-muted-foreground mt-0.5">{item.size} · {item.color}</p>
-                  <p className="font-semibold mt-2">₹{item.product.price.toLocaleString()}</p>
-                  <div className="flex items-center gap-3 mt-3">
+                  <div className="flex items-center justify-between mt-2">
+                    <p className="font-semibold text-sm">₹{item.product.price.toLocaleString()}</p>
+                    <p className="font-semibold text-sm sm:hidden">₹{(item.product.price * item.quantity).toLocaleString()}</p>
+                  </div>
+                  <div className="flex items-center gap-3 mt-2 sm:mt-3">
                     <div className="flex items-center border border-border rounded-lg">
-                      <button onClick={() => updateQuantity(item.product.id, item.quantity - 1)} className="w-8 h-8 flex items-center justify-center hover:bg-secondary transition-colors">
+                      <button onClick={() => updateQuantity(item.product.id, item.quantity - 1)} className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-secondary transition-colors">
                         <Minus className="w-3 h-3" />
                       </button>
-                      <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.product.id, item.quantity + 1)} className="w-8 h-8 flex items-center justify-center hover:bg-secondary transition-colors">
+                      <span className="w-7 sm:w-8 text-center text-xs sm:text-sm font-medium">{item.quantity}</span>
+                      <button onClick={() => updateQuantity(item.product.id, item.quantity + 1)} className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-secondary transition-colors">
                         <Plus className="w-3 h-3" />
                       </button>
                     </div>
@@ -60,7 +63,7 @@ const Cart = () => {
                     </button>
                   </div>
                 </div>
-                <p className="font-semibold text-sm">₹{(item.product.price * item.quantity).toLocaleString()}</p>
+                <p className="font-semibold text-sm hidden sm:block">₹{(item.product.price * item.quantity).toLocaleString()}</p>
               </div>
             ))}
           </div>
