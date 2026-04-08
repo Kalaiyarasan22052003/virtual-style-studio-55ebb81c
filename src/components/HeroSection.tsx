@@ -78,7 +78,7 @@ const HeroSection = () => {
           </h2>
 
           <p
-            className={`text-primary-foreground/75 text-lg md:text-xl max-w-lg leading-relaxed transition-all duration-700 delay-400 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+            className={`text-primary-foreground/75 text-sm sm:text-lg md:text-xl max-w-lg leading-relaxed transition-all duration-700 delay-400 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
           >
             Try before you buy. Our AI lets you see how every piece looks on you — no fitting room needed.
           </p>
