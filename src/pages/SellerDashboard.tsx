@@ -101,7 +101,7 @@ const SellerDashboard = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 mb-8 border-b border-border">
+        <div className="flex gap-1 mb-8 border-b border-border overflow-x-auto scrollbar-hide">
           {tabs.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
@@ -109,13 +109,13 @@ const SellerDashboard = () => {
                 if (id !== "add") setEditingProductId(null);
                 setActiveTab(id);
               }}
-              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+              className={`flex items-center gap-2 px-3 sm:px-4 py-3 text-xs sm:text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                 activeTab === id
                   ? "border-accent text-accent"
                   : "border-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
-              <Icon className="w-4 h-4" /> {label}
+              <Icon className="w-4 h-4" /> <span className="hidden sm:inline">{label}</span><span className="sm:hidden">{id === "add" ? (editingProductId ? "Edit" : "Add") : id === "products" ? "Products" : "Stats"}</span>
             </button>
           ))}
         </div>
