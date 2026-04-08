@@ -54,7 +54,7 @@ const HeroSection = () => {
 
           {/* Brand name with animated reveal */}
           <div className={`transition-all duration-1000 delay-100 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-bold text-primary-foreground leading-[0.9] tracking-tight">
+            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-primary-foreground leading-[0.9] tracking-tight">
               <span className="inline-block animate-[text-glow_3s_ease-in-out_infinite] bg-gradient-to-r from-primary-foreground via-accent to-primary-foreground bg-[length:200%_auto] bg-clip-text text-transparent">
                 V Dorbe
               </span>
