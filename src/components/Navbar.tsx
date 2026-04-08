@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingBag, Heart, Search, Menu, X, User, LogOut, Shield, Store } from "lucide-react";
+import { ShoppingBag, Heart, Search, Menu, X, User, LogOut, Shield, Store, Sparkles } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
 
