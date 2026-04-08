@@ -69,7 +69,7 @@ const HeroSection = () => {
 
           {/* Headline */}
           <h2
-            className={`font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-primary-foreground leading-tight transition-all duration-700 delay-300 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+            className={`font-display text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-primary-foreground leading-tight transition-all duration-700 delay-300 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
           >
             Fashion Meets{" "}
             <span className="italic bg-gradient-to-r from-accent to-gold bg-clip-text text-transparent">
