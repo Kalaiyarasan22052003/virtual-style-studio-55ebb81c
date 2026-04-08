@@ -12,7 +12,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden min-h-[85vh] flex items-center">
+    <section className="relative overflow-hidden min-h-[60vh] sm:min-h-[75vh] md:min-h-[85vh] flex items-center">
       {/* Animated background */}
       <div className="absolute inset-0">
         <img
