@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const categories = [
@@ -26,6 +27,7 @@ const Shop = () => {
   const initialGender = searchParams.get("gender") || "All";
 
   const { data: products = [], isLoading } = useProducts();
+  const { ref: titleRef, visible: titleVisible } = useScrollReveal();
 
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
@@ -58,8 +60,13 @@ const Shop = () => {
     <div className="min-h-screen">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="font-display text-3xl font-semibold">Shop</h1>
+        <div
+          ref={titleRef}
+          className={`flex items-center justify-between mb-6 transition-all duration-700 ${titleVisible ? "animate-reveal-left opacity-100" : "opacity-0 -translate-x-8"}`}
+        >
+          <h1 className="font-display text-3xl font-semibold bg-gradient-to-r from-foreground to-accent bg-[length:200%_auto] bg-clip-text text-transparent animate-text-shimmer">
+            Shop
+          </h1>
           <p className="text-sm text-muted-foreground">{filtered.length} products</p>
         </div>
 
@@ -71,7 +78,7 @@ const Shop = () => {
             placeholder="Search products, tags, categories..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50"
+            className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 transition-shadow duration-300"
           />
           {search && (
             <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -92,16 +99,16 @@ const Shop = () => {
           {/* Filters sidebar */}
           <aside className={`${showFilters ? "block" : "hidden"} md:block w-full md:w-56 flex-shrink-0 space-y-6`}>
             <div>
-              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">Category</p>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3 font-semibold">Category</p>
               <div className="flex flex-wrap gap-2">
                 {categories.map((c) => (
                   <button
                     key={c.value}
                     onClick={() => setCategory(c.value)}
-                    className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${
+                    className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-all duration-300 hover:scale-105 ${
                       category === c.value
                         ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-background border-border hover:border-foreground/30"
+                        : "bg-background border-border hover:border-accent hover:text-accent"
                     }`}
                   >
                     {c.label}
@@ -111,16 +118,16 @@ const Shop = () => {
             </div>
 
             <div>
-              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">Gender</p>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3 font-semibold">Gender</p>
               <div className="flex flex-wrap gap-2">
                 {genders.map((g) => (
                   <button
                     key={g}
                     onClick={() => setGender(g)}
-                    className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${
+                    className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-all duration-300 hover:scale-105 ${
                       gender === g
                         ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-background border-border hover:border-foreground/30"
+                        : "bg-background border-border hover:border-accent hover:text-accent"
                     }`}
                   >
                     {g}
@@ -130,7 +137,7 @@ const Shop = () => {
             </div>
 
             <div>
-              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">Price Range</p>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3 font-semibold">Price Range</p>
               <div className="flex items-center gap-2 text-sm">
                 <span>₹{priceRange[0]}</span>
                 <input
@@ -147,7 +154,7 @@ const Shop = () => {
             </div>
 
             <div>
-              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">Sort By</p>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3 font-semibold">Sort By</p>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
