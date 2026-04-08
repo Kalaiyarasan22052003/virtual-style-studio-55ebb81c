@@ -192,7 +192,7 @@ const TryOn = () => {
             <button
               onClick={handleTryOn}
               disabled={!personImage || !clothingImage || processing || !user}
-              className="w-full py-4 bg-gradient-to-r from-accent to-gold text-accent-foreground font-bold text-lg rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg"
+              className="w-full py-3 sm:py-4 bg-gradient-to-r from-accent to-gold text-accent-foreground font-bold text-base sm:text-lg rounded-xl hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg"
             >
               {processing ? (
                 <>
