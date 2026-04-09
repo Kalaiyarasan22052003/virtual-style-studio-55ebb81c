@@ -14,6 +14,7 @@ import Wishlist from "./pages/Wishlist.tsx";
 import Auth from "./pages/Auth.tsx";
 import SellerDashboard from "./pages/SellerDashboard.tsx";
 import AdminPanel from "./pages/AdminPanel.tsx";
+import Orders from "./pages/Orders.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
