@@ -43,7 +43,7 @@ const Index = () => {
       <HeroSection />
 
       {/* New Arrivals */}
-      <section className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16">
+      <section className="w-full px-4 sm:px-6 py-16">
         <div className="flex items-end justify-between mb-8">
           <SectionHeading label="Curated Selection" title="New Arrivals" />
           <Link to="/shop" className="flex items-center gap-1 text-sm font-medium hover:text-accent hover:gap-2 transition-all duration-300">
@@ -60,7 +60,7 @@ const Index = () => {
       </section>
 
       {/* Try-On Banner */}
-      <section className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16">
+      <section className="w-full px-4 sm:px-6 py-16">
         <div
           ref={tryOnRef.ref}
           className={`bg-primary rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 transition-all duration-1000 ${tryOnRef.visible ? "animate-reveal-scale opacity-100" : "opacity-0 scale-90"}`}
@@ -94,7 +94,7 @@ const Index = () => {
       </section>
 
       {/* Trending */}
-      <section className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16">
+      <section className="w-full px-4 sm:px-6 py-16">
         <div className="flex items-end justify-between mb-8">
           <SectionHeading label="Explore" title="Trending Now" />
           <Link to="/shop" className="flex items-center gap-1 text-sm font-medium hover:text-accent hover:gap-2 transition-all duration-300">
@@ -111,7 +111,7 @@ const Index = () => {
       </section>
 
       {/* Features */}
-      <section className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16">
+      <section className="w-full px-4 sm:px-6 py-16">
         <div
           ref={featuresRef.ref}
           className={`grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-700 ${featuresRef.visible ? "opacity-100" : "opacity-0 translate-y-8"}`}
