@@ -1,12 +1,70 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCart } from "@/contexts/CartContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, cartTotal, clearCart } = useCart();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [checkingOut, setCheckingOut] = useState(false);
+  const [address, setAddress] = useState("");
+
+  const shippingCost = cartTotal >= 999 ? 0 : 99;
+  const total = cartTotal + shippingCost;
+
+  const handleCheckout = async () => {
+    if (!user) {
+      toast.error("Please sign in to checkout");
+      navigate("/auth");
+      return;
+    }
+    if (!address.trim()) {
+      toast.error("Please enter a shipping address");
+      return;
+    }
+
+    setCheckingOut(true);
+    try {
+      const { data: order, error: orderError } = await supabase
+        .from("orders")
+        .insert({
+          user_id: user.id,
+          total,
+          shipping_address: address.trim(),
+          status: "pending",
+        })
+        .select()
+        .single();
+
+      if (orderError || !order) throw orderError || new Error("Failed to create order");
+
+      const orderItems = items.map((item) => ({
+        order_id: order.id,
+        product_id: item.product.id,
+        quantity: item.quantity,
+        price: item.product.price,
+        size: item.size,
+        color: item.color,
+      }));
+
+      const { error: itemsError } = await supabase.from("order_items").insert(orderItems);
+      if (itemsError) throw itemsError;
+
+      clearCart();
+      toast.success("Order placed successfully! 🎉");
+      navigate("/orders");
+    } catch (err: any) {
+      toast.error(err?.message || "Checkout failed. Please try again.");
+    } finally {
+      setCheckingOut(false);
+    }
+  };
 
   if (items.length === 0) {
     return (
@@ -78,22 +136,37 @@ const Cart = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
-                  <span>{cartTotal >= 999 ? "Free" : "₹99"}</span>
+                  <span>{shippingCost === 0 ? "Free" : `₹${shippingCost}`}</span>
                 </div>
                 <div className="border-t border-border pt-3 flex justify-between font-semibold text-base">
                   <span>Total</span>
-                  <span>₹{(cartTotal + (cartTotal >= 999 ? 0 : 99)).toLocaleString()}</span>
+                  <span>₹{total.toLocaleString()}</span>
                 </div>
               </div>
+
+              {/* Shipping Address */}
+              <div className="mt-4">
+                <label className="text-sm font-medium mb-1.5 block">Shipping Address</label>
+                <textarea
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Enter your full shipping address..."
+                  className="w-full p-3 text-sm border border-border rounded-lg bg-background resize-none focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  rows={3}
+                />
+              </div>
+
               <button
-                onClick={() => {
-                  toast.success("Order placed successfully! 🎉");
-                  clearCart();
-                }}
-                className="w-full mt-6 py-3.5 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity"
+                onClick={handleCheckout}
+                disabled={checkingOut}
+                className="w-full mt-4 py-3.5 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
               >
-                Checkout
+                {checkingOut ? "Placing Order..." : "Place Order"}
               </button>
+
+              <Link to="/orders" className="block text-center text-sm text-muted-foreground hover:text-foreground mt-3 transition-colors">
+                View My Orders →
+              </Link>
             </div>
           </div>
         </div>
